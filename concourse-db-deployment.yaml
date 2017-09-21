@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: concourse-db
+  name: concourse-db
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: concourse-db
+    spec:
+      containers:
+      - env:
+        - name: PGDATA
+          value: /database
+        - name: POSTGRES_DB
+          value: concourse
+        - name: POSTGRES_PASSWORD
+          value: ops
+        - name: POSTGRES_USER
+          value: dev
+        image: postgres:9.5
+        name: concourse-db
+        resources: {}
+      restartPolicy: Always
+status: {}

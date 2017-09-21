@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: concourse-web
+  name: concourse-web
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: concourse-web
+    spec:
+      containers:
+      - args:
+        - web
+        env:
+        - name: CONCOURSE_BASIC_AUTH_PASSWORD
+          value: changeme
+        - name: CONCOURSE_BASIC_AUTH_USERNAME
+          value: concourse
+        - name: CONCOURSE_EXTERNAL_URL
+          value: http://${NODE_PUBLIC_IP}
+        - name: CONCOURSE_POSTGRES_DATABASE
+          value: concourse
+        - name: CONCOURSE_POSTGRES_HOST
+          value: concourse-db
+        - name: CONCOURSE_POSTGRES_PASSWORD
+          value: ops
+        - name: CONCOURSE_POSTGRES_USER
+          value: dev
+        image: concourse/concourse
+        name: concourse-web
+        ports:
+        - containerPort: 8080
+        resources: {}
+        # restartPolicy: Always
+        volumeMounts:
+        - mountPath: /concourse-keys
+          name: cache-volume
+      volumes:
+        - name: cache-volume
+          secret:
+            secretName: concourse-web-keys

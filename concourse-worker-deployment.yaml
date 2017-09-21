@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: concourse-worker
+  name: concourse-worker
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: concourse-worker
+    spec:
+      containers:
+      - args:
+        - worker
+        env:
+        - name: CONCOURSE_TSA_HOST
+          value: concourse-web
+        image: concourse/concourse
+        name: concourse-worker
+        resources: {}
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /concourse-keys
+          name: cache-volume
+      restartPolicy: Always
+      volumes:
+      - name: cache-volume
+        secret:
+          secretName: concourse-worker-keys
+status: {}
