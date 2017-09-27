@@ -15,7 +15,7 @@ The second requirement is that you have basic knowledge about kubernetes.
 
 	```shell
 	 git clone git@github.com:idev4u/concourse-ci-kube.git
-	 cd concourse-kube
+	 cd concourse-ci-kube
 	```
 2. As described in the [Concourse Documentation](http://concourse.ci/binaries.html) generate the keys for TSA and ATC
 
