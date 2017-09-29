@@ -23,7 +23,7 @@ spec:
         - name: CONCOURSE_BASIC_AUTH_USERNAME
           value: concourse
         - name: CONCOURSE_EXTERNAL_URL
-          value: http://${NODE_PUBLIC_IP}
+          value: http://${kubernetes_node_public_ip}
         - name: CONCOURSE_POSTGRES_DATABASE
           value: concourse
         - name: CONCOURSE_POSTGRES_HOST
