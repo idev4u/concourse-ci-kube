@@ -14,8 +14,8 @@ The second requirement is that you have basic knowledge about kubernetes.
 1. Grab the project
 
 	```shell
-	 git clone git@github.com:idev4u/concourse-ci-kube.git
-	 cd concourse-ci-kube
+	git clone git@github.com:idev4u/concourse-ci-kube.git
+	cd concourse-ci-kube
 	```
 2. As described in the [Concourse Documentation](http://concourse.ci/binaries.html) generate the keys for TSA and ATC
 
@@ -74,7 +74,7 @@ The second requirement is that you have basic knowledge about kubernetes.
 
 	```
 	  - name: CONCOURSE_EXTERNAL_URL
-	    value: ${kbuernetes_node_public_ip}
+	    value: ${kubernetes_node_public_ip}
 	```
 	This command will deploy the WebUI of your Concourse-Ci  
 	```shell
@@ -97,10 +97,10 @@ The second requirement is that you have basic knowledge about kubernetes.
 
 ## Concourse Pipeline
 
-After the Concourse-Ci deployment is succesfully done, you can login the frist time into Concourse-Ci. Open the url `http://${kbuernetes_node_public_ip}:32080` in your favorite browser and login with user __concourse__ and the password  __changeme__. If you have changed this values in the deployment manifests, use yours. If this works and you have download the tool fly you can push your first pipeline.
+After the Concourse-Ci deployment is succesfully done, you can login the frist time into Concourse-Ci. Open the url `http://${kubernetes_node_public_ip}:32080` in your favorite browser and login with user __concourse__ and the password  __changeme__. If you have changed this values in the deployment manifests, use yours. If this works and you have download the tool fly you can push your first pipeline.
 
 ```shell
-fly -t kube login -c ${kbuernetes_node_public_ip}
+fly -t kube login -c ${kubernetes_node_public_ip}
 fly -t kube set-pipeline -p kube-pipe -c pipeline/pipeline.yml
 fly -t kube expose-pipeline -p kube-pipe
 ```
