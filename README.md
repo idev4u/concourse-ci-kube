@@ -158,7 +158,7 @@ I had a problems with the tsa connection from inside of the worker container.
 
 *Solution:*  
 I fixed it with
-repalceing the service selector name with the endpoint ip.
+replaceing the service selector name with the endpoint ip.
 
 Getting the enpoint of the service `concourse-web` 
 
