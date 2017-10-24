@@ -148,3 +148,30 @@ concourse-db       None         <none>        55555/TCP        28d       service
 concourse-web      None         <nodes>       8080:32080/TCP   10m       service=concourse-web
 concourse-worker   None         <none>        55555/TCP        12m       service=concourse-worker
 ```
+
+## Troubleshooting
+
+### TSA Connection
+*Problemdescription:*
+
+I had a problems with the tsa connection from inside of the worker container.
+
+*Solution:*  
+I fixed it with
+repalceing the service selector name with the endpoint ip.
+
+Getting the enpoint of the service `concourse-web` 
+
+```
+kubectl get endpoints | grep web
+concourse-web      1.1.1.80:8080    17h
+```
+and here the area which is have to change concourse-worker-deployment.yaml
+
+```yml
+   ...
+   # use the endpoint ip, because the dns lookup point to the cluster ip and this ip is not reachable from inside the container
+   # value: concourse-web
+   value: 1.1.1.80
+   ...
+```
