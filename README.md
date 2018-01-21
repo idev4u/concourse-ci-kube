@@ -1,7 +1,7 @@
 # The missing kubernetes deployment for Concourse-Ci
 
 ## Goal
-This project was build to bring Concourse-Ci to Bluemix Container Service, which is based on kubernetes.
+This project was build to bring Concourse-Ci to IBM Cloud Container Service, which is based on kubernetes.
 If someone else has the need to deploy Concourse-Ci to kubernetes he/she should also benefit from this project.
 
 ## Pre Requirements
